@@ -17,6 +17,9 @@ class item(db.Model): # Esta clase será mapeada a una tabla de una base de dato
     barcode = db.Column(db.String(length=12), nullable=False, unique=True)
     description = db.Column(db.String(length=200), nullable=False, unique=True)
 
+    def __repr__(self): # Este método sirve para que, en la terminal, aparezcan los nombres de los items en lugar de un número
+        return f"Item {self.name}"
+
 with app.app_context():
     db.create_all()
 
@@ -31,11 +34,6 @@ def home_page():
 
 @app.route("/market")
 def market_page():
-    items = [
-        {'id': 1, 'name': 'Phone', 'barcode': 5986040, 'price': 500},
-        {'id': 2, 'name': 'Laptop', 'barcode': 9583040, 'price': 900},
-        {'id': 3, 'name': 'Keyboard', 'barcode': 59201940, 'price': 150}
-    ]
-    
+    items = item.query.all() # Este método selecciona todos los items de la tabla y los guarda en la variable
     
     return render_template("market.html", items=items)
