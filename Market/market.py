@@ -1,8 +1,10 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+import pymysql
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:rafael@localhost:3306/market' # Tuve que instalar el driver pymysql para que acepte esta uri, ya que, al parecer trabaja con SQLlite por defecto
 db = SQLAlchemy(app)
+
 # db.init_app(app)
 #@app.route("/") # Esto es un decorador
 #def hello_world():
@@ -13,7 +15,10 @@ class item(db.Model): # Esta clase será mapeada a una tabla de una base de dato
     name = db.Column(db.String(length=30), nullable=False, unique=True)
     price = db.Column(db.Integer(),nullable=False, unique=True)
     barcode = db.Column(db.String(length=12), nullable=False, unique=True)
-    description = db.Column(db.String(length=1024), nullable=False, unique=True)
+    description = db.Column(db.String(length=200), nullable=False, unique=True)
+
+with app.app_context():
+    db.create_all()
 
 @app.route("/about/<username>") 
 def about_page(username):
