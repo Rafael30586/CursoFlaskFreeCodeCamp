@@ -13,6 +13,6 @@ from market import routes
 #    return "<h1>Hello world</h1>"
 
 
-#with app.app_context(): Esto permitió que se crearar la base de datos. En la terminal se me exigía el application context
+#with app.app_context(): Esto permitió que se creara la base de datos. En la terminal se me exigía el application context
  #   db.create_all()
 
