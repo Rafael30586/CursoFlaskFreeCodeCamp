@@ -7,7 +7,8 @@ Register page
 {% block content %}
 <body class="text-center">
     <div class="container">
-    <form action="POST" class="form-register" style="color:white">
+    <form action="/register" class="form-register" style="color:white" method="POST">
+        {{ form.hidden_tag() }}
         <img class="mb-4" src="https://cdn.buymmog.com/buymmog_2024/null_user.jpg" alt="">
         <h1 class="h3 mb-3 font-weight-normal">Please, create your account</h1>
         {{ form.username.label() }}
